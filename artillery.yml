@@ -1,0 +1,26 @@
+config:
+  target: "http://localhost:10001"
+  phases:
+    - duration: 10
+      arrivalRate: 50
+      name: Warm up
+    - duration: 60
+      arrivalRate: 50000
+      name: Sustained load
+scenarios:
+  - name: "Execute Gets and Posts"
+    flow:
+      - get:
+          url: "/"
+          capture:
+            - json: "$.user_id"
+              as: "userId"
+      - post:
+          url: "/"
+          json:
+            username: "user_{{ userId }}"
+            first_name: "first_name"
+            last_name: "last_name"
+            password: "password"
+            email: "email{{ userId }}@email.com"
+            user_id: "{{ userId }}"
