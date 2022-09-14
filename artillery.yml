@@ -5,7 +5,7 @@ config:
       arrivalRate: 50
       name: Warm up
     - duration: 60
-      arrivalRate: 50000
+      arrivalRate: 10000
       name: Sustained load
 scenarios:
   - name: "Execute Gets and Posts"

@@ -27,7 +27,7 @@ async fn hello() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    let addr = ("127.0.0.1", 10001);
+    let addr = ("0.0.0.0", 10001);
     let mut server = HttpServer::new(|| {
         App::new()
             .service(hello)

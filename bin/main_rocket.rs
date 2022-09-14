@@ -1,4 +1,4 @@
-use std::borrow::Cow;
+use std::{borrow::Cow, net::{Ipv4Addr}};
 
 use rust_web_wars::BasicUsername;
 use rocket::{serde::{json::Json}, config::TlsConfig};
@@ -27,6 +27,7 @@ fn echo(mut user : Json<BasicUsername>) -> Json<BasicUsername> {
 async fn main() -> Result<(), rocket::Error> {
     let mut config = rocket::Config::default();
     config.port = 10001;
+    config.address = std::net::IpAddr::V4(Ipv4Addr::new(0,0,0,0));
     if cfg!(feature = "rustls") {
         config.tls = Some(TlsConfig::from_paths("./certs.crt", "./key.key"))
     }else{
